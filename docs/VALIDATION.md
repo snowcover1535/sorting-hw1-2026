@@ -7,7 +7,7 @@
 - Parallel actual team sizes: 1, 2, 4 as requested.
 - Independent code review found no correctness blocker; reporting caveats applied: fixed input/seed, partial move accounting, stack vs buffers, shared VM/quota, residual recursion-depth updates in time build.
 - Compiler/record size metadata describe this execution (GCC 13.3.0, Record 8 bytes); those constants should be revisited on a different ABI or edited build flags.
-- PDF rendered to page images and reviewed; eight pages.
+- PDF rendered to page images and reviewed; seven pages.
 - Repository created at https://github.com/snowcover1535/sorting-hw1-2026; actual URL added to PDF and report/submission.json.
 
 - Final report review corrected critical-path wording for the fixed task depth budget; PDF uses supported Korean prose in place of missing Greek glyphs; Markdown table separators escaped.

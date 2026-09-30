@@ -3,7 +3,7 @@
 저장소: https://github.com/snowcover1535/sorting-hw1-2026
 
 제출할 파일:
-1. `report/sorting_comparison_report.pdf` - 8쪽 보고서, 실제 GitHub URL 포함
+1. `report/sorting_comparison_report.pdf` - 7쪽 보고서, 실제 GitHub URL 포함
 2. 이 GitHub 저장소의 **Code > Download ZIP**으로 다운로드한 ZIP
 
 정상 제출 마감: **2026-09-30 23:59 (한국시간)**

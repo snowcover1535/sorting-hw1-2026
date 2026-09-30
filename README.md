@@ -49,7 +49,7 @@ Debian의 system Python이 pip 설치를 거부하면 system을 강제로 변경
 | tests/test_sort.c | 1,837개 정확성 검사 |
 | tools/run_benchmark.py | 실행·환경 수집·진행 로그 |
 | tools/analyze.py | 원본 CSV 집계·그래프 |
-| tools/build_report.py | 8쪽 PDF 및 편집 가능한 Markdown 생성 |
+| tools/build_report.py | 7쪽 PDF 및 편집 가능한 Markdown 생성 |
 | results/ | 원본 CSV, 로그, 요약 통계, 실행환경 |
 | report/REPORT.md | 편집 가능한 보고서 |
 | report/sorting_comparison_report.pdf | PDF 보고서 |
@@ -76,4 +76,4 @@ make sanitize
 
 ASan/UBSan 검사를 제공하며 이 환경에서는 통과했습니다. LeakSanitizer는 실행 환경의 /proc 접근 제한 때문에 비활성화했습니다. 누수 검사 통과를 뜻하지 않습니다.
 
-AI 지원으로 설계·구현·보고서 초안을 작성했습니다. 표와 그래프의 수치는 실제 실행 결과입니다. 학습 설명은 보고서 2·8쪽에 포함되어 있습니다.
+AI 지원으로 설계·구현·보고서 초안을 작성했습니다. 표와 그래프의 수치는 실제 실행 결과입니다. 학습 설명은 보고서 2쪽에 포함되어 있습니다.
