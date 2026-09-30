@@ -11,3 +11,12 @@
 - Repository created at https://github.com/snowcover1535/sorting-hw1-2026; actual URL added to PDF and report/submission.json.
 
 - Final report review corrected critical-path wording for the fixed task depth budget; PDF uses supported Korean prose in place of missing Greek glyphs; Markdown table separators escaped.
+
+## 2026-09-30 build-command compatibility update
+- Added `make debug` with -O0 -g and OpenMP; readelf confirmed .debug_info.
+- Dockerfile includes python3-matplotlib, python3-numpy, python3-reportlab and fonts-dejavu-core. Existing Codespaces require rebuilding the container or installing these packages once.
+- Plot dependencies are imported before summary outputs are written.
+- Fresh-copy sequence `make clean`, `make run`, `make test`, `make charts`, `make debug`, `make clean`: all exit codes 0 in the available Ubuntu 24.04/GCC environment. Test checks=1837, failures=0. All three PNG/SVG pairs generated; final clean removed executables.
+- Two attempts in the synchronized workspace produced truncated measurement files despite a successful child exit. Repeating in /tmp produced the complete 60/420/224 rows and passed the entire sequence. The original submission data were not replaced.
+- Docker/Podman are unavailable in the validation environment; a new Debian Codespaces container build was not executed here.
+- This update preserves the original measured data, graphs and PDF.

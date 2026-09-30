@@ -22,23 +22,51 @@ make bench
 
 `make bench`는 기존 측정 CSV를 새 값으로 덮어씁니다. 보고서에 실린 원본을 보존하려면 먼저 results/를 복사해 두세요. 실행마다 진행률, 현재 조건, 시각, 단계·누적 소요시간을 출력합니다. 정상 소요시간은 환경에 따라 달라집니다.
 
-## 그래프 및 보고서 재생성
+## 샘플과 같은 명령으로 확인하기
 
-실험 자체는 Python 표준 모듈과 GCC/OpenMP만 사용합니다. 문서 생성에만 matplotlib/reportlab이 필요합니다.
-이미 이 패키지가 있는 Python 환경 또는 별도 가상환경에서:
+수정된 Dockerfile로 새로 만든 Codespaces에는 그래프·PDF 패키지도 설치됩니다.
+**이미 열려 있는 Codespaces에는 저장소 변경만으로 패키지가 추가되지 않습니다.**
+최신 변경을 받은 뒤 컨테이너를 재빌드하거나, 현재 root 터미널에서 아래를 한 번 실행하세요.
 
 ```sh
-python3 -m pip install -r requirements-report.txt
-make charts
-python3 tools/build_report.py --repo-url https://github.com/실제계정/실제저장소
+apt-get update
+apt-get install -y python3-matplotlib python3-numpy python3-reportlab fonts-dejavu-core
 ```
 
-가상환경에서는 `make charts` 대신 `python tools/analyze.py`를 사용해 선택한 Python을 지정할 수도 있습니다.
-Debian의 system Python이 pip 설치를 거부하면 system을 강제로 변경하지 말고 venv가 있는 별도 Python 환경을 사용하세요.
-`report/submission.json`에 실제 repository_url과 필요하면 author, student_id를 입력할 수 있습니다.
+| 명령 | 동작 |
+|---|---|
+| `make run` | 전체 실험 실행 (`make bench`와 동일), results/ 갱신 |
+| `make test` | 정확성 검사, 실패가 있으면 0이 아닌 종료 코드 |
+| `make charts` | 현재 CSV로 요약 통계와 report/의 PNG·SVG 생성 |
+| `make debug` | `-O0 -g -fopenmp`로 src/debug.out 빌드 |
+| `make clean` | src/와 tests/의 .out 실행 파일만 삭제 |
+
+`make debug`는 빌드만 수행합니다. 디버거는 `gdb --args ./src/debug.out main`으로 실행합니다.
+`make clean` 이후에는 실행 파일을 다시 빌드해야 합니다. `main.c`는 단독 프로그램 파일이 아니므로 실행 버튼으로 파일 하나만 컴파일하지 마세요.
+
+```sh
+make src/main.out
+./src/main.out main
+./src/main.out parallel
+```
+
+위 직접 실행은 터미널에만 결과를 출력하고 기존 CSV는 덮어쓰지 않습니다.
+
+## 그래프 및 보고서 재생성
+
+```sh
+make charts
+python3 tools/build_report.py
+```
+
+`report/submission.json`에 실제 GitHub 주소가 저장되어 있습니다.
 **저장소: https://github.com/snowcover1535/sorting-hw1-2026**
 
-보고서에는 이 저장소 URL이 반영되어 있습니다.
+일반 Linux 환경에서 필요한 패키지가 없다면 별도 가상환경에 `requirements-report.txt`를 설치하세요.
+`make PYTHON=/가상환경/bin/python charts`로 Python을 지정할 수도 있습니다.
+현재 PDF는 저장소에 포함된 원본 측정값과 짝을 이룹니다. `make run`으로 재측정하면 기존 PDF가 자동 갱신되는 것은 아닙니다.
+보고서 생성기의 일부 설명·환경·비교 횟수는 원래 실험을 기준으로 작성되어 있으므로,
+다른 환경의 새 결과를 제출할 때는 그래프뿐 아니라 해당 본문도 새 측정값과 대조해 수정해야 합니다.
 
 ## 주요 파일
 

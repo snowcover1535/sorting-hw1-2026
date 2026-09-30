@@ -14,7 +14,12 @@ def aggregate(rows):
 def main():
     start=time.perf_counter()
     def log(p,s):print(f'[{datetime.datetime.now().astimezone().isoformat(timespec="seconds")}] progress={p}% status={s} stage_s={time.perf_counter()-start:.3f}',flush=True)
-    log(0,'aggregate raw CSV');rows=[]
+    log(0,'check plotting dependencies')
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    import numpy as np
+    log(5,'aggregate raw CSV');rows=[]
     for f in ['timings.csv','parallel.csv']:
         with (ROOT/'results'/f).open() as fp: rows+=list(csv.DictReader(fp))
     assert len(rows)==644 and all(r['correct']=='1' for r in rows)
@@ -24,10 +29,6 @@ def main():
     counts=list(csv.DictReader((ROOT/'results/counts.csv').open()))
     (ROOT/'results/summary.json').write_text(json.dumps(summary,indent=2))
     log(30,'plot figures')
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-    import numpy as np
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'axes.spines.top':False,'axes.spines.right':False,'savefig.dpi':180})
     colors=['#197c80','#df763a','#5165a4'];algs=['merge','quick_first','heap'];labels=['Merge','Quick (first pivot)','Heap']
     def save(fig,name):
